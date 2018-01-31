@@ -14,13 +14,14 @@ class Services implements \Magento\Framework\Option\ArrayInterface
      * @var array
      */
     protected $sufix = array(
-        41106 => 'Pac sem contrato',
-        41068 => 'Pac com contrato',
-        40096 => 'Sedex sem contrato',
-        40436 => 'Sedex sem contrato',
-        40444 => 'Sedex sem contrato',
-        81019 => 'E-Sedex com contrato',
-        40045 => 'E-Sedex com contrato',
+        '04669' => 'Pac com contrato',
+        '41106' => 'Pac sem contrato',
+        '04162' => 'Sedex com contrato',
+        '40096' => 'Sedex sem contrato',
+        '40436' => 'Sedex sem contrato',
+        '40444' => 'Sedex sem contrato',
+        '81019' => 'E-Sedex com contrato',
+        '40045' => 'E-Sedex com contrato',
     );
 
     /**
