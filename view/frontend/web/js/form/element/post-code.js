@@ -71,30 +71,33 @@ define([
                 var value = this.value();
                 value = value.replace('-', '');
 
-                var ajaxurl = url.build("rest/V1/consultaCep/"+value);
+                if (!jquery('body').hasClass('checkout-cart-index')) {
 
-                jquery.getJSON(ajaxurl, function(data) {
-                    if(data.error){
-                        alert(data.error);
-                    }else{
-                        if(registry.get(element.parentName + '.' + 'country_id')){
-                            registry.get(element.parentName + '.' + 'country_id').value('BR');
+                    var ajaxurl = url.build("rest/V1/consultaCep/"+value);
+
+                    jquery.getJSON(ajaxurl, function(data) {
+                        if(data.error){
+                            alert(data.error);
+                        }else{
+                            if(registry.get(element.parentName + '.' + 'country_id')){
+                                registry.get(element.parentName + '.' + 'country_id').value('BR');
+                            }
+                            if(registry.get(element.parentName + '.' + 'street.0')){
+                                registry.get(element.parentName + '.' + 'street.0').value(data.logradouro);
+                            }
+                            if(registry.get(element.parentName + '.' + 'street.2')){
+                                registry.get(element.parentName + '.' + 'street.2').value(data.bairro);
+                            }
+                            if(registry.get(element.parentName + '.' + 'city')){
+                                registry.get(element.parentName + '.' + 'city').value(data.cidade);
+                            }
+                            if(registry.get(element.parentName + '.' + 'region_id')){
+                                registry.get(element.parentName + '.' + 'region_id').value(data.uf);
+                            }
                         }
-                        if(registry.get(element.parentName + '.' + 'street.0')){
-                            registry.get(element.parentName + '.' + 'street.0').value(data.logradouro);
-                        }
-                        if(registry.get(element.parentName + '.' + 'street.2')){
-                            registry.get(element.parentName + '.' + 'street.2').value(data.bairro);
-                        }
-                        if(registry.get(element.parentName + '.' + 'city')){
-                            registry.get(element.parentName + '.' + 'city').value(data.cidade);
-                        }
-                        if(registry.get(element.parentName + '.' + 'region_id')){
-                            registry.get(element.parentName + '.' + 'region_id').value(data.uf);
-                        }
-                    }
-                    jquery('#checkout-loader').remove();
-                });
+                        jquery('#checkout-loader').remove();
+                    });
+                }
             }else{
                 jquery('#checkout-loader').remove();
             }
