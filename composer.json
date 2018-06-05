@@ -17,7 +17,6 @@
             "Bleez\\Correios\\": ""
         }
     },
-    "minimum-stability": "dev",
     "repositories": {
         "trezo/php-sigep": {
             "type": "git",
