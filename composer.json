@@ -19,7 +19,7 @@
     },
     "minimum-stability": "dev",
     "repositories": {
-        "trezo/php-sigep": {
+        "stavarengo/php-sigep": {
             "type": "git",
             "url": "https://github.com/trezoteam/php-sigep.git"
         }
