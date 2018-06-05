@@ -21,7 +21,7 @@
     "repositories": {
         "trezo/php-sigep": {
             "type": "git",
-            "url": "https://github.com/trezoteam/php-sigep.git"
+            "url": "git@github.com:trezoteam/php-sigep.git"
         }
     }
 }
