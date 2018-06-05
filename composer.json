@@ -16,11 +16,5 @@
         "psr-4": {
             "Bleez\\Correios\\": ""
         }
-    },
-    "repositories": {
-        "trezo/php-sigep": {
-            "type": "git",
-            "url": "git@github.com:trezoteam/php-sigep.git"
-        }
     }
 }
