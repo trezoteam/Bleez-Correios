@@ -5,7 +5,8 @@
     "version": "0.0.3",
     "require": {
         "php": "~5.6.0|>=7.0.0",
-        "tcesarpinho/php-sigep": ">=0.0.1",
+        "stavarengo/php-sigep": "dev-master",
+        "stavarengo/php-sigep-fpdf": "dev-master",
         "cagartner/phpquery": ">=0.9.8",
         "ext-soap": "*"
     },
@@ -17,5 +18,15 @@
             "Bleez\\Correios\\": ""
         }
     },
-    "minimum-stability": "dev"
+    "minimum-stability": "dev",
+    "repositories": {
+        "stavarengo/php-sigep": {
+            "type": "git",
+            "url": "https://github.com/stavarengo/php-sigep.git"
+        },
+        "stavarengo/php-sigep-fpdf": {
+            "type": "git",
+            "url": "https://github.com/stavarengo/php-sigep-fpdf.git"
+        }
+    },
 }
