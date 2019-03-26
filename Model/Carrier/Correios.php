@@ -170,26 +170,29 @@ class Correios extends \Magento\Shipping\Model\Carrier\AbstractCarrierOnline imp
             $result = $this->_rateResultFactory->create();
 
             $allowed_services = explode(',', $this->getConfigData('types'));
-            foreach($services->getResult() as $service){
-                if($service->getErroCodigo() == 0 && in_array((string)$service->getServico()->getCodigo(), $allowed_services)) {
-                    if($this->getConfigData('free_shipping_enabled') && $this->getConfigData('free_shipping_only') && $service->getServico()->getCodigo() != $this->getConfigData('free_shipping_service')){
-                        continue;
+
+            if (count($services->getResult()) > 0) {
+                foreach($services->getResult() as $service){
+                    if($service->getErroCodigo() == 0 && in_array((string)$service->getServico()->getCodigo(), $allowed_services)) {
+                        if($this->getConfigData('free_shipping_enabled') && $this->getConfigData('free_shipping_only') && $service->getServico()->getCodigo() != $this->getConfigData('free_shipping_service')){
+                            continue;
+                        }
+                        $method = $this->_rateMethodFactory->create();
+                        $method->setCarrier('correios');
+                        $method->setCarrierTitle($this->getConfigData('name'));
+                        $method->setMethod($service->getServico()->getNome());
+                        if($this->getConfigData('free_shipping_enabled') && $service->getServico()->getCodigo() == $this->getConfigData('free_shipping_service') && $request->getFreeShipping()){
+                            $method->setMethodTitle($this->getConfigData('free_shipping_text') . sprintf($this->getConfigData('text_days'), $this->_calculateShippingDays($service)));
+                            $method->setPrice(0);
+                            $method->setCost(0);
+                        }else{
+                            $method->setMethodTitle($this->_getServiceName($service->getServico()->getCodigo()) . sprintf($this->getConfigData('text_days'), $this->_calculateShippingDays($service)));
+                            $method->setPrice($this->_calculatePrice($service->getValor()));
+                            $method->setCost($this->_calculatePrice($service->getValor()));
+                        }
+                        $method->setMethodDescription('Quantidade de fretes: '.$this->_qtdFretes);
+                        $result->append($method);
                     }
-                    $method = $this->_rateMethodFactory->create();
-                    $method->setCarrier('correios');
-                    $method->setCarrierTitle($this->getConfigData('name'));
-                    $method->setMethod($service->getServico()->getNome());
-                    if($this->getConfigData('free_shipping_enabled') && $service->getServico()->getCodigo() == $this->getConfigData('free_shipping_service') && $request->getFreeShipping()){
-                        $method->setMethodTitle($this->getConfigData('free_shipping_text') . sprintf($this->getConfigData('text_days'), $this->_calculateShippingDays($service)));
-                        $method->setPrice(0);
-                        $method->setCost(0);
-                    }else{
-                        $method->setMethodTitle($this->_getServiceName($service->getServico()->getCodigo()) . sprintf($this->getConfigData('text_days'), $this->_calculateShippingDays($service)));
-                        $method->setPrice($this->_calculatePrice($service->getValor()));
-                        $method->setCost($this->_calculatePrice($service->getValor()));
-                    }
-                    $method->setMethodDescription('Quantidade de fretes: '.$this->_qtdFretes);
-                    $result->append($method);
                 }
             }
 
