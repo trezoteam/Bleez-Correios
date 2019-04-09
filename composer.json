@@ -6,7 +6,7 @@
     "minimum-stability": "dev",
     "require": {
         "php": "~5.6.0|>=7.0.0",
-        "trezo/php-sigep": "0.0.3",
+        "trezo/php-sigep": "0.0.4",
         "cagartner/phpquery": ">=0.9.8",
         "ext-soap": "*"
     },
