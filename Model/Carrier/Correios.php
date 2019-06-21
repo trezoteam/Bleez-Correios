@@ -174,7 +174,7 @@ class Correios extends \Magento\Shipping\Model\Carrier\AbstractCarrierOnline imp
             if (is_array($services->getResult()) ? count($services->getResult()) : 0) {
                 foreach($services->getResult() as $service){
                     if($service->getErroCodigo() == 0 && in_array((string)$service->getServico()->getCodigo(), $allowed_services)) {
-                        if($this->getConfigData('free_shipping_enabled') && $this->getConfigData('free_shipping_only')){
+                        if($this->getConfigData('free_shipping_enabled') && $this->getConfigData('free_shipping_only') && $service->getServico()->getCodigo() != $this->getConfigData('free_shipping_service')){
                             continue;
                         }
                         $method = $this->_rateMethodFactory->create();
